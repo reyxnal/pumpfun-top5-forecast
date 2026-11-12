@@ -165,7 +165,8 @@ def main():
     for row in last_rows:
         mint = row.get("mint")
         if mint and mint not in last_mark_rank:
-            last_mark_rank[mint] = row.get("rank", 10 ** 9)
+            rank = row.get("rank")
+            last_mark_rank[mint] = rank if isinstance(rank, int) else 10 ** 9
             last_mark_mints.append(mint)
     if len(last_mark_mints) < places:
         # fall back: rank all coins by their last-seen cap
